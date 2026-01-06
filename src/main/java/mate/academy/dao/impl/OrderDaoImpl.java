@@ -2,6 +2,7 @@ package mate.academy.dao.impl;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Root;
 import java.util.List;
 import mate.academy.dao.OrderDao;
@@ -36,7 +37,11 @@ public class OrderDaoImpl implements OrderDao {
             CriteriaQuery<Order> cq = cb.createQuery(Order.class);
             Root<Order> orderRoot = cq.from(Order.class);
 
-            cq.select(orderRoot).where(cb.equal(orderRoot.get("user"), user));
+            orderRoot.fetch("tickets", JoinType.LEFT);
+
+            cq.select(orderRoot)
+                    .where(cb.equal(orderRoot.get("user"), user))
+                    .distinct(true);
 
             return session.createQuery(cq).getResultList();
         } catch (Exception e) {

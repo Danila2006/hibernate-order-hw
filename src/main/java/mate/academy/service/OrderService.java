@@ -6,7 +6,7 @@ import mate.academy.model.ShoppingCart;
 import mate.academy.model.User;
 
 public interface OrderService {
-    Order comppleteOrder(ShoppingCart shoppingCart);
+    Order completeOrder(ShoppingCart shoppingCart);
 
     List<Order> getOrdersHistory(User user);
 }

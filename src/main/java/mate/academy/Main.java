@@ -98,7 +98,7 @@ public class Main {
         shoppingCartService.addSession(testSession, testUser);
 
         OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
-        Order testOrder = orderService.comppleteOrder(
+        Order testOrder = orderService.completeOrder(
                 shoppingCartService.getByUser(testUser)
         );
 
